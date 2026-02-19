@@ -1,0 +1,8 @@
+github.com/Egot3/Zhao v0.0.0-20260218194250-9b29616e7110 h1:X+pnIiHW8z49qANn1ZPZk/sxZrarPskIop2XEFKNmpo=
+github.com/Egot3/Zhao v0.0.0-20260218194250-9b29616e7110/go.mod h1:jwG9Y9r14i88XghNNe+BOgvONXCH6H8QN+N928W0Rd8=
+github.com/Egot3/Zhao v0.0.0-20260218201224-965f6ccdcb0c h1:qL4F6zI97mNRDuJfg6plY4MVaKsjtnSYaOG/9wIdgCo=
+github.com/Egot3/Zhao v0.0.0-20260218201224-965f6ccdcb0c/go.mod h1:jwG9Y9r14i88XghNNe+BOgvONXCH6H8QN+N928W0Rd8=
+github.com/coder/websocket v1.8.14 h1:9L0p0iKiNOibykf283eHkKUHHrpG7f65OE3BhhO7v9g=
+github.com/coder/websocket v1.8.14/go.mod h1:NX3SzP+inril6yawo5CQXx8+fk145lPDC6pumgx0mVg=
+github.com/rabbitmq/amqp091-go v1.10.0 h1:STpn5XsHlHGcecLmMFCtg7mqq0RnD+zFr4uzukfVhBw=
+github.com/rabbitmq/amqp091-go v1.10.0/go.mod h1:Hy4jKW5kQART1u+JkDTF9YYOQUHXqMuhrgxOEeS7G4o=
