@@ -6,14 +6,13 @@ import (
 
 	wss "github.com/Egot3/Dialyn/internal/wssConnection"
 	diacon "github.com/Egot3/Zhao"
-	"github.com/Egot3/Zhao/queues"
 	"github.com/Egot3/Zhao/sub"
 )
 
 func main() {
 	config := diacon.RabbitMQConfiguration{
 		URL:  "amqp://guest:guest@localhost",
-		Port: "1130",
+		Port: "380",
 	}
 	conn, err := diacon.Connect(config)
 	if err != nil {
@@ -27,20 +26,7 @@ func main() {
 	}
 	defer subscriber.Close()
 
-	qStruct := queues.QueueStruct{
-		Name:           "RINGRINGRING",
-		Durable:        false,
-		DeleteOnUnused: false,
-		Exclusive:      false,
-		NoWait:         false,
-		Args:           nil,
-	}
-	q, err := queues.NewQueue(subscriber.Ch, qStruct)
-	if err != nil {
-		log.Panicf("Couldn't create a queue: %v", err)
-	}
-
-	f, err := subscriber.StartSubscriberFunc(q.Name, "", true, false, false, false, nil)
+	f, err := subscriber.StartSubscriberFunc("test-queue", "", true, false, false, false, nil)
 	if err != nil {
 		log.Panicf("Couldn't get a starter func: %v", err)
 	}

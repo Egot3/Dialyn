@@ -32,11 +32,13 @@ func WssHandler(ch chan any) func(w http.ResponseWriter, r *http.Request) {
 
 			if ctx.Err() != nil {
 				log.Println("connection closed, stopping")
+				conn.CloseNow()
 				return
 			}
 
 			if err := wsjson.Write(ctx, conn, string(value.Body)); err != nil {
 				log.Printf("write error: %v", err)
+				conn.CloseNow()
 				return
 			}
 		}
