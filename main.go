@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	wss "github.com/Egot3/Dialyn/internal/wssConnection"
 	diacon "github.com/Egot3/Zhao"
@@ -11,8 +13,8 @@ import (
 
 func main() {
 	config := diacon.RabbitMQConfiguration{
-		URL:  "amqp://guest:guest@localhost",
-		Port: "380",
+		URL:  os.Getenv("RABBIT_URL"),
+		Port: os.Getenv("RABBIT_PORT"),
 	}
 	conn, err := diacon.Connect(config)
 	if err != nil {
@@ -35,7 +37,7 @@ func main() {
 	go f(forever)
 
 	http.HandleFunc("/wss", wss.WssHandler(forever))
-	log.Fatal(http.ListenAndServe(":8250", nil))
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", os.Getenv("OWN_PORT")), nil))
 
 	// for message := range forever {
 	// 	log.Printf("got message: %#v", message)

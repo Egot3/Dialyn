@@ -1,0 +1,35 @@
+name: Build&Push to GHCR
+
+on:
+    push:
+        branches: [main]
+
+permissions:
+    contents: read
+    packages: write
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: checkout
+              uses: actions/checkout@v4
+
+            - name: re-naming conventions
+              run: |
+                REPO_NAME="${GITHUB_REPOSITORY#*/}"
+                REPO_LOWERCASE="${REPO_NAME,,}"
+                GITHUB_OWNER="${GITHUB_REPOSITORY_OWNER,,}"
+                echo "GHCR_REPO=$REPO_LOWERCASE" >> $GITHUB_ENV
+                echo "GHCR_OWNER=$GITHUB_OWNER" >> $GITHUB_ENV
+
+
+            - name: Log in to GHCR
+              run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ env.GHCR_OWNER }} --password-stdin
+
+            - name: "Build and push"
+              run: |
+                IMAGE_NAME=ghcr.io/${{ env.GHCR_OWNER }}/${{ env.GHCR_REPO }}
+                docker build -t $IMAGE_NAME:latest .
+                docker push $IMAGE_NAME:latest
