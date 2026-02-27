@@ -1,13 +1,15 @@
 package main
 
 import (
-	"fmt"
+	"context"
 	"log"
-	"net/http"
 	"os"
 
-	wss "github.com/Egot3/Dialyn/internal/wssConnection"
+	banye "github.com/Egot3/Banye"
+	"github.com/Egot3/Dialyn/internal/manager"
+	"github.com/Egot3/Dialyn/internal/middleware"
 	diacon "github.com/Egot3/Zhao"
+	"github.com/Egot3/Zhao/queues"
 	"github.com/Egot3/Zhao/sub"
 )
 
@@ -28,20 +30,14 @@ func main() {
 	}
 	defer subscriber.Close()
 
-	f, err := subscriber.StartSubscriberFunc("test-queue", "", true, false, false, false, nil)
-	if err != nil {
-		log.Panicf("Couldn't get a starter func: %v", err)
-	}
-	forever := make(chan any, 1)
+	subscriberManager := manager.NewSubscriberManager(subscriber)
 
-	go f(forever)
+	updateChan := make(chan []*queues.QueueStruct)
 
-	http.HandleFunc("/wss", wss.WssHandler(forever))
-	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", os.Getenv("OWN_PORT")), nil))
+	client := banye.NewClient(nil)
+	before, after := middleware.TraceTripperMiddleware()
+	client.UseTripper(before, after)
 
-	// for message := range forever {
-	// 	log.Printf("got message: %#v", message)
-	// }
-
-	<-forever
+	go manager.CheckForUpdates(context.Background(), client, updateChan)
+	go subscriberManager.Reconcile(updateChan)
 }

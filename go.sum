@@ -1,5 +1,9 @@
+github.com/Egot3/Banye v0.0.1 h1:FCXlRg/30feUwfl5iT0yfezdHi7PfUTC2ptNINNs2jE=
+github.com/Egot3/Banye v0.0.1/go.mod h1:eYSoAnQua6qOcL+nHaM7cM4tSnPVui6bKZaPA0VaSas=
 github.com/Egot3/Zhao v0.0.0-20260218201224-965f6ccdcb0c h1:qL4F6zI97mNRDuJfg6plY4MVaKsjtnSYaOG/9wIdgCo=
 github.com/Egot3/Zhao v0.0.0-20260218201224-965f6ccdcb0c/go.mod h1:jwG9Y9r14i88XghNNe+BOgvONXCH6H8QN+N928W0Rd8=
+github.com/Egot3/Zhao v0.0.2 h1:QUh7V3gSjX7DX26eKjW79TBzDX3u1dAB4OuUboO8050=
+github.com/Egot3/Zhao v0.0.2/go.mod h1:sENIrevc8Vix0mP2+zwkk/rUiYKOtX6PImFEj4fptpw=
 github.com/coder/websocket v1.8.14 h1:9L0p0iKiNOibykf283eHkKUHHrpG7f65OE3BhhO7v9g=
 github.com/coder/websocket v1.8.14/go.mod h1:NX3SzP+inril6yawo5CQXx8+fk145lPDC6pumgx0mVg=
 github.com/rabbitmq/amqp091-go v1.10.0 h1:STpn5XsHlHGcecLmMFCtg7mqq0RnD+zFr4uzukfVhBw=
